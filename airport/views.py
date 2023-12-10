@@ -42,7 +42,7 @@ class RouteViewSet(
     mixins.ListModelMixin,
     GenericViewSet,
 ):
-    queryset = Route.objects.select_related("source", "destination")
+    queryset = Route.objects.all().select_related("source", "destination")
     serializer_class = RouteSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
@@ -134,7 +134,7 @@ class FlightViewSet(
         .prefetch_related("crew")
         .annotate(
             tickets_available=(
-                F("airplane__row") * F("airplane__seats_in_row") - Count("tickets")
+                F("airplane__rows") * F("airplane__seats_in_row") - Count("tickets")
             )
         )
     )

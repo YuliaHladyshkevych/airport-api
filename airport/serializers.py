@@ -33,6 +33,10 @@ class RouteListSerializer(serializers.ModelSerializer):
         source="destination.closest_big_city", read_only=True
     )
 
+    class Meta:
+        model = Route
+        fields = ("id", "source", "destination", "distance")
+
 
 class AirplaneTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,6 +60,18 @@ class AirplaneSerializer(serializers.ModelSerializer):
 
 class AirplaneListSerializer(serializers.ModelSerializer):
     airplane_type = serializers.CharField(source="airplane_type.name", read_only=True)
+
+    class Meta:
+        model = Airplane
+        fields = (
+            "id",
+            "name",
+            "rows",
+            "seats_in_row",
+            "capacity",
+            "airplane_type",
+            "image",
+        )
 
 
 class AirplaneImageSerializer(serializers.ModelSerializer):
