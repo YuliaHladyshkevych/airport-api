@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.db.models import F, Count
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
@@ -65,6 +66,23 @@ class RouteViewSet(
             return RouteListSerializer
 
         return RouteSerializer
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "source",
+                type={"type": "str"},
+                description="Filter by source (ex. ?source=atlanta)",
+            ),
+            OpenApiParameter(
+                "destination",
+                type={"type": "str"},
+                description="Filter by destination (ex. ?destination=atlanta)",
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
 
 class AirplaneTypeViewSet(
@@ -169,6 +187,23 @@ class FlightViewSet(
             return FlightDetailSerializer
 
         return FlightSerializer
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "departure_time",
+                type={"type": "date"},
+                description="Filter by departure date (ex. ?departure_time=2023-12-12)",
+            ),
+            OpenApiParameter(
+                "arrival_time",
+                type={"type": "date"},
+                description="Filter by arrival date (ex. ?arrival_time=2023-12-12)",
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
 
 class OrderPagination(PageNumberPagination):
