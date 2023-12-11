@@ -103,7 +103,7 @@ class FlightListSerializer(serializers.ModelSerializer):
     crew = serializers.SlugRelatedField(
         many=True, read_only=True, slug_field="full_name"
     )
-    route = serializers.CharField(source="route.source_destination", read_only=True)
+    route = serializers.StringRelatedField(read_only=True)
     airplane = serializers.CharField(source="airplane.name", read_only=True)
     airplane_image = serializers.ImageField(source="airplane.image", read_only=True)
     tickets_available = serializers.IntegerField(read_only=True)
@@ -152,7 +152,7 @@ class FlightDetailSerializer(FlightSerializer):
     crew = serializers.SlugRelatedField(
         many=True, read_only=True, slug_field="full_name"
     )
-    route = serializers.CharField(source="route.source_destination", read_only=True)
+    route = serializers.StringRelatedField(read_only=True)
     airplane = serializers.CharField(source="airplane.name", read_only=True)
     taken_places = TicketSeatsSerializer(source="tickets", many=True, read_only=True)
 
