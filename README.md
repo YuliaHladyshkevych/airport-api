@@ -7,7 +7,7 @@ Install PostgresSQL and create db.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/airport_api
+git clone https://github.com/YuliaHladyshkevych/airport-api
 ```
 2. Navigate to the project directory:
 ```bash
