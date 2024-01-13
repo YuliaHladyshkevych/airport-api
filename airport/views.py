@@ -43,8 +43,7 @@ class RouteViewSet(
     mixins.ListModelMixin,
     GenericViewSet,
 ):
-    queryset = Route.objects.all().select_related("source", "destination")
-    serializer_class = RouteSerializer
+    queryset = Route.objects.select_related("source", "destination")
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
     def get_queryset(self):
@@ -100,7 +99,6 @@ class AirplaneViewSet(
     viewsets.GenericViewSet,
 ):
     queryset = Airplane.objects.select_related("airplane_type")
-    serializer_class = AirplaneSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
     def get_serializer_class(self):
@@ -156,7 +154,6 @@ class FlightViewSet(
             )
         )
     )
-    serializer_class = FlightSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
     def get_queryset(self):
@@ -217,7 +214,6 @@ class OrderViewSet(
     GenericViewSet,
 ):
     queryset = Order.objects.all()
-    serializer_class = OrderSerializer
     pagination_class = OrderPagination
     permission_classes = (IsAuthenticated,)
 
