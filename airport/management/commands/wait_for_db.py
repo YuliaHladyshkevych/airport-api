@@ -25,8 +25,9 @@ class Command(BaseCommand):
                 conn.close()
                 db_conn = True
                 break
-            except OperationalError:
-                self.stdout.write("Database unavailable, waiting...")
+            except OperationalError as e:
+                self.stdout.write(f"Database unavailable: {str(e)}")
+                self.stdout.write("Retrying...")
                 time.sleep(self.RETRY_INTERVAL)
                 retries += 1
 
