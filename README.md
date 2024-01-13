@@ -58,8 +58,7 @@ docker pull yulia0904/airport_api
 ```
 - run container
 ```
-docker-compose build
-docker-compose up
+docker-compose up --build
 ```
 
 ## Getting access

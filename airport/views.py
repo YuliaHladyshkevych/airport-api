@@ -145,7 +145,7 @@ class FlightViewSet(
     viewsets.GenericViewSet,
 ):
     queryset = (
-        Flight.objects.all()
+        Flight.objects
         .select_related("airplane", "route")
         .prefetch_related("crew")
         .annotate(
